@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>LAB05: JAVASCRIPT CƠ BẢN</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+    h2 {
+      color: brown;
+      border-bottom: 2px solid #b46;
+      padding-bottom: 5px;
+    }
+    .select {
+      margin: 5px;
+      padding: 8px 12px;
+      font-size: 16px;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>LAB05: JAVASCRIPT CƠ BẢN</h2>
+  <h3>Caculator</h3>
+
+  <input type="number" id="num1" value="12">
+  <input type="number" id="num2" value="12"><br><br>
+
+  <button class="select" onclick="add()">Addition(+)</button>
+  <button class="select" onclick="subtract()">Subtraction(-)</button>
+  <button class="select" onclick="multiply()">Multiplication(X)</button>
+  <button class="select" onclick="divide()">Division(/)</button>
+
+  <p id="result">Result: </p>
+
+  <script>
+    function add() {
+      let a = parseFloat(document.getElementById("num1").value);
+      let b = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").innerHTML = "Result Addition: " + (a + b);
+    }
+
+    function subtract() {
+      let a = parseFloat(document.getElementById("num1").value);
+      let b = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").innerHTML = "Result Subtraction: " + (a - b);
+    }
+
+    function multiply() {
+      let a = parseFloat(document.getElementById("num1").value);
+      let b = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").innerHTML = "Result Multiplication: " + (a * b);
+    }
+
+    function divide() {
+      let a = parseFloat(document.getElementById("num1").value);
+      let b = parseFloat(document.getElementById("num2").value);
+      document.getElementById("result").innerHTML = "Result Division: " + (a / b);
+    }
+  </script>
+</body>
+</html>
