@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halloween</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pattaya&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery-latest.js">
+    </script>
+    <script>
+            $(document).ready(function() {
+        const navMenu = $('#nav-menu'),
+            navToggle = $('#nav-toggle'),
+            navClose = $('#nav-close');
+        if(navToggle.length) {
+            navToggle.on('click', function() {
+                navMenu.addClass('show-menu');
+            });
+        }
+        if(navClose.length) {
+            navClose.on('click', function() {
+                navMenu.removeClass('show-menu');
+            });
+        }
+        $('.nav__link').on('click', function() {
+            if ($(window).width() < 768) {
+                navMenu.removeClass('show-menu');
+            }
+        });
+        $(window).on('scroll', function() {
+            if($(this).scrollTop() >= 50) {
+                $('#header').addClass('scroll-header');
+            } else {
+                $('#header').removeClass('scroll-header');
+            }
+        
+            scrollActive();
+            scrollUp();
+        });
+        function scrollUp(){
+            const scrollUp = $('#scroll-up');
+            if(window.scrollY >= 350) {
+                scrollUp.addClass('show-scroll');
+            } else {
+                scrollUp.removeClass('show-scroll');
+            }
+        }
+        function scrollActive(){
+            const scrollY = window.pageYOffset;
+
+            $('.section[id]').each(function(){
+                const sectionHeight = $(this).outerHeight(),
+                    sectionTop = $(this).offset().top - 58,
+                    sectionId = $(this).attr('id');
+
+                if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+                    $('.nav__menu a[href*=' + sectionId + ']').addClass('active-link');
+                } else {
+                    $('.nav__menu a[href*=' + sectionId + ']').removeClass('active-link');
+                }
+            });
+        }
+        const spookySound = $('#spooky-sound')[0];
+        function playAudio() {
+            if (spookySound.paused) {
+                spookySound.play().catch(error => {
+                    console.warn("Audio autoplay blocked.");
+                });
+                $(document).off('click', playAudio); 
+            }
+        }
+        $(document).on('click', playAudio);
+    });
+    </script>
+    <style>
+        :root {
+            --header-height: 3.5rem;
+            --first-color: hsl(28, 80%, 50%); /* Cam chủ đạo */
+            --first-color-alt: hsl(28, 70%, 40%); 
+            --title-color: hsl(20, 4%, 85%); /* Trắng ngà */
+            --text-color: hsl(20, 4%, 55%); /* Xám nhạt */
+            --body-color: hsl(20, 10%, 10%); /* Đen đậm */
+            --container-color: hsl(20, 10%, 14%); /* Xám đen */
+            --box-shadow-color: rgba(255, 120, 0, 0.4);
+            --body-font: 'Poppins', sans-serif;
+            --title-font: 'Pattaya', cursive;
+            --big-font-size: 2.5rem;
+            --h1-font-size: 1.5rem;
+            --h2-font-size: 1.25rem;
+            --normal-font-size: 0.938rem;
+            --z-fixed: 100;
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            margin: var(--header-height) 0 0 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            background-color: var(--body-color);
+            color: var(--text-color);
+        }
+        ul { list-style: none; }
+        a { text-decoration: none; }
+        img { max-width: 100%; height: auto; }
+
+        h1, h2, h3, h4 {
+            color: var(--title-color);
+            font-weight: 600;
+        }
+
+        .section { padding: 4.5rem 0 1rem; }
+        .container { max-width: 1024px; margin-left: 1rem; margin-right: 1rem; }
+        .grid { display: grid; gap: 1.5rem; }
+
+        .section__title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--title-color);
+            font-family: var(--title-font);
+        }
+        .section__title span {
+            color: var(--first-color);
+        }
+    
+        .header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: var(--z-fixed);
+            background-color: transparent;
+            transition: 0.3s;
+        }
+
+        .nav {
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chu { color:white;}
+
+        .nav__logo {
+            color: var(--first-color);
+            font-weight: 700;
+            font-size: var(--h1-font-size);
+            font-family: var(--title-font);
+            display: flex;
+            align-items: center;
+        }
+        .nav__logo-img {
+            margin-right: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .nav__toggle, .nav__close { color: var(--first-color); font-size: 1.5rem; cursor: pointer; }
+
+        .nav__menu { display: flex; align-items: center; }
+        .nav__list { display: flex; column-gap: 2.5rem; }
+        .nav__link { color: var(--title-color); font-weight: 500; transition: 0.3s; }
+        .nav__link:hover, .active-link { color: var(--first-color); }
+        .nav__close, .nav__toggle { display: none; }
+
+        .scroll-header {
+            background-color: var(--container-color);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+        .button {
+            display: inline-block;
+            background-color: var(--first-color);
+            color: var(--body-color);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: var(--first-color-alt);
+        }
+
+        .button--link {
+            background: none;
+            color: var(--first-color);
+            padding: 0;
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+
+  
+        .home { padding-top: 5rem; }
+        .home__container { grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: center; }
+        .home__img {
+            height: 350px;
+            background-color: var(--container-color);
+            border-radius: 1rem;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            animation: floatAnimation 4s ease-in-out infinite;
+            border: 3px solid var(--first-color);
+        }
+
+        .home__subtitle { color: var(--first-color); font-size: 1rem; }
+        .home__title-description { font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+        .home__title {
+            font-family: var(--title-font);
+            font-size: var(--big-font-size);
+            margin: 0.5rem 0 1rem 0;
+            line-height: 1.1;
+            text-shadow: 0 0 8px var(--box-shadow-color);
+        }
+        .home__title--small { font-size: 1.9rem; }
+        .home__buttons { margin-top: 1.5rem; }
+        .home--reverse .home__container {
+            grid-template-areas: "data img"; 
+        }
+        .home--reverse .home__data { grid-area: data; }
+        .home--reverse .home__img { grid-area: img; }
+
+        @keyframes floatAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+    
+        .about__container {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .about__item {
+            background-color: var(--container-color);
+            padding: 2rem 1.5rem;
+            border-radius: 1rem;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 120, 0, 0.1);
+        }
+        .about__item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .about__img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: 3px solid var(--first-color);
+        }
+        .about__item h3 { margin-bottom: 0.5rem; }
+
+        .trick__container {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .trick__content {
+            position: relative;
+            background-color: var(--container-color);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            text-align: center;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+        .trick__content:hover {
+            box-shadow: 0 5px 10px rgba(255, 120, 0, 0.2);
+        }
+        .trick__img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 0.5rem;
+            border-radius: 50%;
+            border: 2px solid var(--first-color);
+            object-fit: cover;
+        }
+        .trick__category { font-size: 0.75rem; color: var(--text-color); }
+        .trick__price { display: block; color: var(--title-color); font-weight: 700; margin-top: 0.25rem; }
+
+        .trick__button {
+            position: absolute;
+            bottom: 0.75rem;
+            right: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            font-size: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            color: var(--body-color);
+        }
+        .new__discount {
+            background-color: var(--container-color);
+            padding: 2rem;
+            border-radius: 1rem;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            border: 3px solid var(--first-color);
+            box-shadow: 0 0 15px rgba(255, 120, 0, 0.5);
+        }
+
+        .new__title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: var(--first-color);
+        }
+        .new__img {
+            border-radius: 0.5rem;
+            display: block;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .contact { text-align: center; }
+        .contact__description { max-width: 600px; margin: 0 auto 1.5rem; }
+        .contact__form {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .contact__input {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--first-color);
+            background-color: var(--body-color);
+            color: var(--title-color);
+            flex-grow: 1;
+        }
+
+        .footer {
+            background-color: var(--container-color);
+            padding-top: 3rem;
+        }
+
+        .footer__container {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            row-gap: 2.5rem;
+            padding-bottom: 3rem;
+        }
+        .footer__logo { margin-bottom: 1rem; }
+        .footer__description { margin-bottom: 1.5rem; }
+
+        .footer__social-link {
+            font-size: 1.25rem;
+            color: var(--title-color);
+            margin-right: 1rem;
+            transition: 0.3s;
+        }
+
+        .footer__title { font-size: 1.1rem; color: var(--first-color); margin-bottom: 1.5rem; }
+        .footer__link { color: var(--text-color); transition: 0.3s; }
+        .footer__link:hover { color: var(--first-color); }
+        .footer__links li { margin-bottom: 0.75rem; }
+
+        .footer__copy {
+            display: block;
+            text-align: center;
+            margin-top: 4.5rem;
+            padding-bottom: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-color);
+            border-top: 1px solid var(--text-color);
+            padding-top: 1rem;
+        }
+
+        .scrollup {
+            position: fixed;
+            right: 1rem;
+            bottom: -20%;
+            background-color: var(--first-color);
+            color: var(--body-color);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+            z-index: 10;
+            transition: 0.4s;
+            box-shadow: 0 0 10px rgba(255, 120, 0, 0.8);
+        }
+        .show-scroll { bottom: 3rem; }
+        @media screen and (max-width: 767px) {
+            .nav__menu {
+                position: fixed;
+                background-color: var(--container-color);
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100%;
+                padding: 3.5rem 0 0 3rem;
+                transition: 0.4s;
+                box-shadow: -1px 0 4px rgba(0, 0, 0, 0.4);
+            }
+            .nav__list { flex-direction: column; row-gap: 3rem; }
+            .nav__close { position: absolute; top: 0.75rem; right: 1rem; display: block; }
+            .nav__toggle { display: block; }
+            
+            .show-menu { right: 0; }
+            
+            .home__container { grid-template-columns: 1fr; }
+            .home__img { order: 1; }
+            .home__data { order: 2; text-align: center; }
+            .home__buttons { justify-content: center; display: flex; }
+            
+            
+            .home--reverse .home__container { grid-template-areas: none; }
+            .home--reverse .home__img { order: 1; }
+            .home--reverse .home__data { order: 2; }
+            
+            .about__container { grid-template-columns: 1fr; }
+            
+    
+            .new__discount { grid-template-columns: 1fr; text-align: center; }
+            .new__img { height: 150px; }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .container { margin-left: auto; margin-right: auto; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="spooky-sound" loop><source src="spooky_music.mp3" type="audio/mpeg"></audio>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">Halloween 2025</a>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active-link">Trang chủ</a></li>
+                    <li class="nav__item"><a href="#about" class="nav__link">Giới thiệu</a></li>
+                    <li class="nav__item"><a href="#trick" class="nav__link">Sảm phẩm</a></li>
+                </ul>
+                <i class="fas fa-times nav__close" id="nav-close"></i>
+            </div>
+            <i class="fas fa-bars nav__toggle" id="nav-toggle"></i>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="home home--reverse section">
+            <div class="home__container container grid">
+                <div class="home__data">
+                    <h4 class="home__subtitle">Emily & Sam</h4>
+                    <h3 class="home__title-description">Tham gia ngay: Cặp đôi ma quái</h3>
+                    <h1 class="home__title home__title--small"># TRẢ LẠI KẸO BÔNG CHO TA</h1>
+                    <p class="home__description">
+                        Emily đã trộm kẹo bông từ anh trai của chị ta và ăn hết chúng trong 1 lần. Thật là một cô gái đói khác. Và anh trai cô ấy - Sam đang nổi giận và quyết đòi lại kẹo từ cô.
+                    </p>
+                    <div class="home__buttons">
+                        <a href="#" class="button">Tham gia</a>
+                        <a href="#" class="button button--link">Đặt trước <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="home__img" style="background-image: url(/COMP/html/images/download.jpg);">
+                    </div>
+            </div>
+        </section>
+
+        <section class="home section">
+            <div class="home__container container grid">
+                <div class="home__img" style="background-image: url(/COMP/html/images/download\ \(1\).jpg);"></div>
+                <div class="home__data">
+                    <h4 class="home__subtitle">Thuyền trưởng "Sem"</h4>
+                    <h3 class="home__title-description">Tham gia ngay: Bóng ma thuyền trưởng</h3>
+                    <h1 class="home__title home__title--small"># HỒI SINH SỌ ĐẦU LÂU MA QUÁI</h1>
+                    <p class="home__description">
+                        Trong hành trình tìm kiếm người hãm hại mình, thuyền trưởng Sem đã trở lại nhân gian từ địa ngục tâm tối. Với quyền năng phép thuật tối thượng...
+                    </p>
+                    <div class="home__buttons">
+                        <a href="#" class="button">Tham gia</a>
+                        <a href="#" class="button button--link">Đặt trước <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section about" id="about">
+            <h2 class="section__title">Giới thiệu</h2>
+            <div class="about__container container grid">
+                <div class="about__item"><img src="/COMP/html/halloween/Iconcreme-Halloween-Pumpkin.512.png" alt="Bí ngô" class="about__img"><h3>Lịch sử - Ngày nay</h3><p>
+                    Halloween có nguồn gốc từ lễ hội Samhain (phát âm: Sow-in) của người Celtic cổ đại — sống ở khu vực Ireland, Anh và Bắc Pháp khoảng 2.000 năm trước.
+                    Samhain được tổ chức vào đêm 31 tháng 10, đánh dấu kết thúc mùa hè và mùa thu hoạch, cũng như bắt đầu mùa đông lạnh lẽo.
+                </p></div>
+                <div class="about__item"><img src="/COMP/html/halloween/Iconcreme-Halloween-Pumpkin.512.png" alt="Bí ngô" class="about__img"><h3>Lịch sử - Ngày nay</h3><p>
+                    Người Celtic tin rằng đêm đó ranh giới giữa người sống và người chết trở nên mờ nhạt, và linh hồn người chết có thể trở lại trần gian.
+                    Để xua đuổi linh hồn xấu, họ:
+                    Đốt lửa trại lớn (bonfire)
+                    Hóa trang bằng da và đầu động vật để ngụy trang khỏi ma quỷ.
+                    🎃 Biểu tượng nổi tiếng — Bí ngô khắc mặt (Jack-o’-lantern)
+                </p></div>
+                <div class="about__item"><img src="/COMP/html/halloween/Iconcreme-Halloween-Pumpkin.512.png" alt="Bí ngô" class="about__img"><h3>Lịch sử - Ngày nay</h3><p>
+                   🕸️ Halloween ngày nay
+                    Ngày nay, Halloween không còn mang ý nghĩa tôn giáo sâu sắc như xưa, mà trở thành:
+                    Lễ hội hóa trang, trang trí ma quái
+                    Các hoạt động như trick or treat, xem phim kinh dị, tiệc hóa trang, trang trí nhà cửa 🎭
+                    Halloween được tổ chức rầm rộ nhất tại:
+                    Mỹ
+                    Canada
+                    Anh
+                    Ireland
+                    và dần lan ra nhiều quốc gia châu Á (trong đó có Việt Nam).
+                </p></div>
+            </div>
+
+        </section>
+        <section class="section trick" id="trick">
+            <h2 class="section__title">Sản <span>phẩm</span> hóa <span>trang</span></h2>
+            <div class="trick__container container grid">
+                <article class="trick__content">
+                    <img src="/COMP/html/halloween/Iconcreme-Halloween-Mummy.512.png" alt="Xsc ướp" class="trick__img">
+                    <h3 class="trick__title">Xác ướp</h3>
+                    <span class="trick__category">Ruy băng trắng</span>
+                    <span class="trick__price">50.000 VND</span>
+                    <button class="button trick__button"><i class="fas fa-shopping-bag"></i></button>
+                </article>
+                <article class="trick__content">
+                    <img src="/COMP/html/halloween/Witch.ico" alt="Ma" class="trick__img">
+                    <h3 class="trick__title">Witch</h3>
+                    <span class="trick__category">Đội đầu</span>
+                    <span class="trick__price">50.000 VND</span>
+                    <button class="button trick__button"><i class="fas fa-shopping-bag"></i></button>
+                </article>
+                <article class="trick__content">
+                    <img src="/COMP/html/halloween/Iconcreme-Halloween-Bat.512.png" alt="Batman" class="trick__img">
+                    <h3 class="trick__title">Batman</h3>
+                    <span class="trick__category">Cánh dơi</span>
+                    <span class="trick__price">50.000 VND</span>
+                    <button class="button trick__button"><i class="fas fa-shopping-bag"></i></button>
+                </article>
+                </div>
+        </section>
+        <section class="section contact" id="contact">
+            <h2 class="section__title"> <span>Tham gia</span> ngay</h2>
+            <p class="contact__description container">Thông tin chi tiết</p>
+            <form action="" class="contact__form container">
+                <button type="submit" class="button"><a class="chu" href="/COMP/html/6.1.2.2.html" target="_blank">Đăng kí</a></button>
+                <button type="submit" class="button"><a class="chu" href="/COMP/html/6.1.2.1.html" target="_blank">Liên hệ</a></button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer section">
+        <div class="footer__container container grid">
+            <div>
+                <a href="#" class="footer__logo">Halloween 2025</a>
+                <p class="footer__description">Come and fly away with me.</p>
+
+            </div>
+        </div>
+        <span class="footer__copy">&#169;Trần Thanh Trúc</span>
+    </footer>
+
+    <a href="#" class="scrollup" id="scroll-up"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
