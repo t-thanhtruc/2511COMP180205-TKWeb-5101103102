@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function submit(){
+            //let tien=parseInt (document.getElementById('tien').value);
+            //document.write("So tien da nhap la: " + tien*1000);
+            //document.getElementById('result').innerHTML = "So tien la " + tien;
+            let tien= parseFloat (document.getElementById('tien').value);
+            let lai = tien * ((parseFloat(document.getElementById('lai').value))/100);
+
+        }
+    </script>
+    <p>Nhập số tiền
+    <input  type="text" id="tien" value=""></p>
+    <p>Nhập số năm
+    <input  type="text" id="nam" value=""></p>
+    <p>Nhập lãi suất
+    <input  type="text" id="lai" value=""></p>
+
+    <button onclick="submit()">Submit</button>
+    <p id="tong"></p>
+    <p id="result"></p>
+</body>
+</html>

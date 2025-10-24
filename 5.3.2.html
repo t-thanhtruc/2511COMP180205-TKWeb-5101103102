@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIT-HCMUE Shop: iPhone 14</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Google Font: Roboto (Phổ biến, rõ ràng) -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS TÙY CHỈNH (Nhúng để đảm bảo single-file) -->
+    <style>
+        /* Biến màu sắc theo template gốc (Xanh đậm/Trắng) */
+        :root {
+            --primary-color: #0d6efd; /* Bootstrap Primary Blue */
+            --dark-blue: #003366;
+            --light-bg: #f8f9fa;
+            --text-dark: #333;
+            --red-price: #dc3545; /* Đỏ */
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light-bg);
+        }
+
+        .container-main {
+            max-width: 1200px;
+        }
+
+        /*==================== HEADER ====================*/
+        .header-top {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 1rem 0;
+            border-bottom: 5px solid var(--primary-color);
+        }
+        .header-top h1 {
+            color: white;
+            font-weight: 700;
+        }
+        .header-top h5 {
+            opacity: 0.8;
+            font-weight: 400;
+        }
+        .header-object {
+            width: 150px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        /*==================== NAVBAR & SEARCH ====================*/
+        .navbar-custom {
+            background-color: white;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        .btn-language {
+            color: var(--text-dark);
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+        }
+        .btn-language:hover {
+            background-color: #e0e0e0;
+        }
+
+        /*==================== MAIN CONTENT LAYOUT ====================*/
+        .content-area {
+            padding-top: 1.5rem;
+        }
+
+        /*==================== SIDEBAR ====================*/
+        .sidebar-box {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+        .sidebar-box h4 {
+            color: var(--dark-blue);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        /* Sidebar: Giỏ hàng */
+        .cart-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .cart-info img {
+            width: 40px;
+            height: 40px;
+            margin-right: 0.75rem;
+        }
+        .cart-details strong {
+            color: var(--primary-color);
+            display: block;
+            font-size: 1.1rem;
+        }
+        .cart-details span {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Sidebar: Chủng loại */
+        .category-list .list-group-item {
+            border: none;
+            padding: 0.5rem 0;
+            color: var(--text-dark);
+            transition: color 0.2s;
+        }
+        .category-list .list-group-item:hover {
+            color: var(--primary-color);
+            background-color: transparent;
+        }
+        
+        /*==================== PRODUCT DETAIL STYLES ====================*/
+        .product-detail-container {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Product Image */
+        .product-gallery img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        .product-gallery .img-thumbnail {
+            cursor: pointer;
+            padding: 0.5rem;
+            height: 80px;
+            object-fit: contain;
+        }
+
+        /* Product Info */
+        .product-title {
+            color: var(--dark-blue);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .product-status {
+            font-weight: 500;
+        }
+        .product-old-price {
+            font-size: 1.2rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 1rem;
+        }
+        .product-current-price {
+            font-size: 2rem;
+            color: var(--red-price);
+            font-weight: 700;
+        }
+        .price-block {
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            border: 1px dashed var(--red-price);
+        }
+        
+        /* Product Tabs (Specifications/Details) */
+        .nav-tabs .nav-link.active {
+            color: white;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .nav-tabs .nav-link {
+            color: var(--text-dark);
+        }
+        .tab-content {
+            border: 1px solid #ddd;
+            border-top: none;
+            padding: 1.5rem;
+            background-color: var(--light-bg);
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+        .spec-table th {
+            width: 40%;
+            color: var(--dark-blue);
+            font-weight: 600;
+        }
+        .spec-table td {
+            width: 60%;
+        }
+
+        /* Related Products */
+        .related-products .card {
+            border: 1px solid #ddd;
+        }
+
+        /*==================== FOOTER ====================*/
+        .footer-custom {
+            background-color: var(--dark-blue);
+            color: white;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!--==================== HEADER TOP ====================-->
+    <header class="header-top">
+        <div class="container container-main">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1>FIT-HCMUE Shop</h1>
+                    <h5>Bring knowledge to everyone</h5>
+                </div>
+                <div class="col-md-6 text-end">
+                    <!-- Ảnh Placeholder cho Header Object -->
+                    <img src="/COMP/html/images/lovepik-business-team-meeting-room-cheer-to-celebrate-picture_500710768.jpg" alt="Header Object" class="header-object">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--==================== NAVBAR ====================-->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container container-main">
+            <!-- Navbar Toggler for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Navigation Links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Giới thiệu</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Sản phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Hỏi đáp</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tài khoản</a></li>
+                </ul>
+                
+                <!-- Search & Language -->
+                <div class="d-flex align-items-center">
+                    <form class="d-flex me-3">
+                        <input class="form-control form-control-sm me-1" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-sm btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-language dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe"></i> English
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-globe"></i> Tiếng Việt</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!--==================== MAIN CONTENT AREA ====================-->
+    <div class="container container-main content-area">
+        <div class="row">
+            
+            <!-- LEFT COLUMN: MAIN CONTENT (col-lg-9) - PRODUCT DETAIL -->
+            <div class="col-lg-9 order-lg-1 order-2">
+                <div class="product-detail-container">
+                    
+                    <!-- Breadcrumb -->
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-secondary">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="text-decoration-none text-secondary">Điện thoại</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">iPhone 14</li>
+                        </ol>
+                    </nav>
+
+                    <!-- Product Main Info Row -->
+                    <div class="row mb-4">
+                        
+                        <!-- Product Gallery (Left) -->
+                        <div class="col-md-5 product-gallery">
+                            <img src="/COMP/html/images/iphone-14-pro_2__5.webp" alt="iPhone 14" class="img-fluid mb-3">
+                        
+                        </div>
+
+                        <!-- Product Details (Right) -->
+                        <div class="col-md-7">
+                            <h2 class="product-title">iPhone 14 ProMax (128GB) Chính hãng VN/A</h2>
+                            <hr>
+
+                            <!-- Price Block -->
+                            <div class="price-block">
+                                <span class="product-current-price">29,999,000 đ</span>
+    
+                            </div>
+
+                            <!-- Description Brief -->
+                            <p class="text-dark">
+                                Màn hình: OLED 6.1"Super Retina XDR <br>
+                                Hệ điều hành: iOS 16 <br>
+                                CPU: Apple A15 Bionic <br>
+                                RAM: 6 GB <br>
+                                Pin: 3279 mAh | Sạc nhanh 20W
+                            </p>
+                            
+                            <!-- Quantity and Add to Cart -->
+                            <div class="d-flex align-items-center mt-4">
+                                <span class="me-3 text-dark">Số lượng:</span>
+                                <input type="number" class="form-control me-3" value="1" min="1" style="width: 80px;">
+                                <button class="btn btn-danger btn-lg flex-grow-1">
+                                    <i class="fas fa-shopping-cart me-2"></i> MUA NGAY
+                                </button>
+                            </div>
+                            <div class="d-grid mt-2">
+                                <button class="btn btn-outline-primary">
+                                    <i class="fas fa-heart me-2"></i> Thêm vào yêu thích
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Tabs: Specifications and Details -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="detail-tab" data-bs-toggle="tab" data-bs-target="#detail" type="button" role="tab" aria-controls="detail" aria-selected="false">Chi tiết sản phẩm</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <!-- Tab 2: Chi tiết sản phẩm -->
+                        <div class="tab-pane fade" id="detail" role="tabpanel" aria-labelledby="detail-tab">
+                            <p>Đây là nội dung mô tả chi tiết sản phẩm. iPhone 14 mang đến những cải tiến mạnh mẽ về camera, hiệu năng xử lý và thời lượng pin vượt trội so với thế hệ trước.</p>
+                            <ul>
+                                <li>Thiết kế cao cấp, bền bỉ.</li>
+                                <li>Chế độ chụp ảnh Cinematic Mode.</li>
+                                <li>Hiệu năng A15 Bionic siêu mạnh mẽ.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: SIDEBAR (col-lg-3) - GIỮ NGUYÊN -->
+            <div class="col-lg-3 order-lg-2 order-1">
+                
+                <!-- BOX 1: GIỎ HÀNG -->
+                <div class="sidebar-box">
+                    <h4 class="d-flex align-items-center"><i class="fas fa-shopping-cart me-2"></i> Giỏ hàng</h4>
+                    <div class="cart-info">
+                        <!-- Placeholder cho GIF giỏ hàng -->
+                        <div class="cart-details">
+                            <strong>10 sp</strong>
+                            <span>5,000,000 đ</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-danger w-100 mt-2">Xem Giỏ hàng</a>
+                </div>
+
+                <!-- BOX 2: TÌM KIẾM NÂNG CAO -->
+                <div class="sidebar-box">
+                    <h4 class="d-flex align-items-center"><i class="fas fa-search-plus me-2"></i> Tìm kiếm</h4>
+                    <form>
+                        <input type="text" class="form-control mb-2" placeholder="Từ khóa">
+                    </form>
+                </div>
+
+                <!-- BOX 3: CHỦNG LOẠI -->
+                <div class="sidebar-box">
+                    <h4 class="d-flex align-items-center"><i class="fas fa-tags me-2"></i> Chủng loại</h4>
+                    <ul class="list-group list-group-flush category-list">
+                        <a href="#" class="list-group-item">Điện thoại</a>
+                        <a href="#" class="list-group-item">Laptop</a>
+                        <a href="#" class="list-group-item">Tablet</a>
+                        <a href="#" class="list-group-item">Điều hoà</a>
+                        <a href="#" class="list-group-item">Tivi</a>
+                        <a href="#" class="list-group-item">Tủ lạnh</a>
+                        <a href="#" class="list-group-item">Điện gia dụng</a>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer-custom">
+        <div class="container container-main">
+            FIT-HCMUE © 2023
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle (Cần thiết cho Tabs, Dropdown, Navbar) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

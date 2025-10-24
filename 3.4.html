@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Tính tiền bán hàng</title>
+<style>
+    body {
+        font-family: Arial;
+        background-color: #fff;
+    }
+    table {
+        border-collapse: collapse;
+        width: 700px;
+        margin: 30px auto;
+        border: 2px solid black;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+    th {
+        background-color: #ccc;
+    }
+    input[type="text"] {
+        width: 80px;
+        text-align: center;
+    }
+    .total {
+        text-align: right;
+        font-weight: bold;
+    }
+    .controls {
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Tên hàng hóa</th>
+        <th>Số lượng có</th>
+        <th>Số lượng mua</th>
+        <th>Đơn giá</th>
+        <th>Chọn mua</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>CPU</td>
+        <td><input type="text" value="14" disabled></td>
+        <td><input type="text" id="qty1" value="0" disabled></td>
+        <td><input type="text" id="price1" value="120 $" disabled></td>
+        <td><input type="checkbox" id="buy1" onclick="enableInput(1)"></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>HDD</td>
+        <td><input type="text" value="14" disabled></td>
+        <td><input type="text" id="qty2" value="0" disabled></td>
+        <td><input type="text" id="price2" value="10 $" disabled></td>
+        <td><input type="checkbox" id="buy2" onclick="enableInput(2)"></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>RAM</td>
+        <td><input type="text" value="12" disabled></td>
+        <td><input type="text" id="qty3" value="0" disabled></td>
+        <td><input type="text" id="price3" value="29 $" disabled></td>
+        <td><input type="checkbox" id="buy3" onclick="enableInput(3)"></td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>ROM</td>
+        <td><input type="text" value="23" disabled></td>
+        <td><input type="text" id="qty4" value="0" disabled></td>
+        <td><input type="text" id="price4" value="130 $" disabled></td>
+        <td><input type="checkbox" id="buy4" onclick="enableInput(4)"></td>
+    </tr>
+    <tr>
+        <td colspan="2" class="controls">
+            <button onclick="calculateTotal()">OK</button>
+        </td>
+        <td colspan="3" class="total">
+            Tổng cộng: <input type="text" id="total" value="0" disabled>
+        </td>
+        <td>
+            <input type="checkbox" id="vat"> VAT
+        </td>
+    </tr>
+</table>
+
+<script>
+function enableInput(i) {
+    let qty = document.getElementById("qty" + i);
+    qty.disabled = !document.getElementById("buy" + i).checked;
+    if (!qty.disabled) qty.focus();
+    else qty.value = 0;
+}
+
+function calculateTotal() {
+    let total = 0;
+
+    for (let i = 1; i <= 4; i++) {
+        let buy = document.getElementById("buy" + i);
+        if (buy.checked) {
+let qty = parseInt(document.getElementById("qty" + i).value) || 0;
+            let price = parseInt(document.getElementById("price" + i).value);
+            if (qty < 0) {
+                alert("Số lượng mua phải >= 0");
+                return;
+            }
+            total += qty * price;
+        }
+    }
+
+    if (document.getElementById("vat").checked) {
+        total *= 1.1;
+    }
+
+    document.getElementById("total").value = total.toFixed(2);
+}
+</script>
+
+</body>
+</html>

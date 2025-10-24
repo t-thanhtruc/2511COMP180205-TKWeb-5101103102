@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Ứng dụng quản lý sản phẩm</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f5f5f5;
+    }
+    h2 {
+      color: #333;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin: auto;
+    }
+    input[type="text"] {
+      padding: 6px;
+      width: 60%;
+      margin-right: 10px;
+    }
+    button {
+      padding: 6px 12px;
+      margin: 2px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button.add {
+      background-color: #007bff;
+      color: white;
+    }
+    button.edit {
+      background-color: #28a745;
+      color: white;
+    }
+    button.delete {
+      background-color: #dc3545;
+      color: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #e9ecef;
+    }
+    .total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .box{
+        text-align:left;
+        background-color:#ccc;
+        border-radius;
+        border:#ccc 2px;
+        padding: 5px;
+        width: 300px;
+
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Add New Product</h2>
+    <div class="box">
+        <input type="text" id="productName" placeholder="New Product">
+    <button class="add" onclick="addProduct()">Add</button>
+    </div>
+    <h2>Display All Product</h2>
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Product Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="total"></div>
+  </div>
+
+  <script>
+    // Danh sách sản phẩm ban đầu
+    let products = [
+      "Sony Xperia",
+      "Samsung Galaxy",
+      "Nokia 6",
+      "Xiaomi Redmi Note 4",
+      "Apple iPhone 6S",
+      "Xiaomi Mi 5s Plus",
+      "Apple iPhone 8 Plus",
+      "Fujitsu F-04E",
+      "Oppo A71"
+    ];
+
+    // Hàm hiển thị danh sách sản phẩm
+    function displayProducts() {
+      const tbody = document.querySelector("#productTable tbody");
+      tbody.innerHTML = "";
+
+      for (let i = 0; i < products.length; i++) {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${i + 1}</td>
+          <td>${products[i]}</td>
+          <td>
+            <button class="edit" onclick="editProduct(${i})">Edit</button>
+            <button class="delete" onclick="deleteProduct(${i})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById("total").innerText = `${products.length} products`;
+    }
+
+    // Hàm thêm sản phẩm
+    function addProduct() {
+      const name = document.getElementById("productName").value.trim();
+      if (name === "") {
+        alert("Vui lòng nhập tên sản phẩm!");
+        return;
+      }
+      products.push(name);
+      document.getElementById("productName").value = "";
+      displayProducts();
+      alert("Đã thêm sản phẩm mới!");
+    }
+
+    // Hàm sửa sản phẩm
+    function editProduct(index) {
+      const newName = prompt("Nhập tên mới cho sản phẩm:", products[index]);
+      if (newName && newName.trim() !== "") {
+        products[index] = newName.trim();
+        displayProducts();
+        alert("Đã cập nhật tên sản phẩm!");
+      }
+    }
+
+    // Hàm xóa sản phẩm
+    function deleteProduct(index) {
+      if (confirm(`Bạn có chắc muốn xóa "${products[index]}" không?`)) {
+        products.splice(index, 1);
+        displayProducts();
+        alert("Đã xóa sản phẩm!");
+      }
+    }
+
+    // Gọi hàm hiển thị danh sách khi tải trang
+    displayProducts();
+  </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @media screen {
+             h2{
+            color:brown;
+            text-align:center;
+         }
+             .menu{
+            background-color:gainsboro;
+            width: 1300px;
+            height: 40px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            top: 100px;
+            margin: 2px;
+         }
+             .menu li{
+            list-style-type: none;
+            float:left;
+            /* padding: 0 20px; */
+            display:block;
+         }
+             .menu li a{
+            text-decoration: none;
+            color:black;
+            padding: 0 20px;
+           
+         }
+             .menu li a:hover{
+            background-color: gray;
+            border-bottom: 2px gray solid;
+            padding: 10px;
+         }
+
+             .box{
+            display:flex;
+            border-radius: 10px;
+            padding:5px;
+            box-shadow: 10px solid gray;
+         }
+             .container{
+            display:grid;
+            grid-template-columns: 20px 60px 20px;
+         }
+             .container{
+            display:grid;
+            grid-template-columns: 20px 80px 20px;
+         }
+             .container{
+            display:flex;
+            }
+             .box img{
+            border-radius: 10px;
+         }
+             .box img:hover{
+            border: solid 2px blue;
+            transform:scale(1.1);
+            transition:0.5s;
+
+         }
+            
+        }
+        @media(max-width:760px){
+            .container{
+                display: 5px;
+                flex-direction: column;
+            }
+        }
+       
+    </style>     
+</head>
+<body>
+    <h2>MENU MINH HỌA NGANG - MỘT CẤP</h2>
+    <div class="menu">
+        <ul>
+            <li><a href="./layout1.html">Trang chủ</a></li>
+            <li><a href="">Giới thiệu</a></li>
+            <li><a href="">Dự án</a></li>
+            <li><a href="./menu.html">Sản phẩm</a></li>
+            <li><a href="">Dịch vụ</a></li>
+            <li><a href="">Tin tức</a></li>
+            <li><a href="">Liên hệ</a></li>  
+        </ul>
+    </div>
+
+    <div class="container">
+       <div class="box">
+        <img src="E:\code\html\img\images\.1jpg"></div>
+       <div class="box">
+        <img src="E:\code\html\img\images\.2jpg"></div>
+       <div class="box">
+        <img src="E:\code\html\img\images\.3jpg"></div>   
+        
+    </div>
+</body>
+</html>

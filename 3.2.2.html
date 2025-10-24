@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function show() {
+            let ten=document.getElementById('name').value;
+            switch (ten){
+                case 'Ổi':
+                    document.getElementById('result').innerHTML ="20000 VND/kg";
+                    break;
+                case 'Dưa hấu':
+                    document.getElementById('result').innerHTML ="20000 VND/kg";
+                    break;
+                case 'Táo':
+                    document.getElementById('result').innerHTML ="30000 VND/kg";
+                    break;
+                case 'Cam':
+                    document.getElementById('result').innerHTML ="40000 VND/kg";
+                    break;
+                case 'Chôm chôm':
+                    document.getElementById('result').innerHTML ="40000 VND/kg";
+                    break;
+                case 'Măng cụt':
+                    document.getElementById('result').innerHTML ="50000 VND/kg";
+                    break;
+                case 'Thanh long':
+                    document.getElementById('result').innerHTML ="50000 VND/kg";
+                    break;
+                case 'Xoài':
+                    document.getElementById('result').innerHTML ="50000 VND/kg";
+                    break;                            
+                default:
+                    document.getElementById('result').innerHTML ="KHONG CO MAT HANG NAY!";     
+            } 
+        }
+    </script>
+    <h1>GIÁ HOA QUẢ</h1>
+    <input type="text" id="name" value="">
+    <button onclick="show()">Xem giá</button>
+    <div id="result"></div>
+</body>
+</html>

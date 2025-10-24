@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đại Dương Động</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        .aquarium {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to top, #005f9c, #00bfff); 
+            position: relative;
+        }
+        .sprite {
+            position: absolute;
+            white-space: nowrap;
+            will-change: transform; 
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transform: scaleX(-1); 
+            animation: swim-right linear infinite;
+        }
+        @keyframes swim-right {
+            0% { transform: translateX(-100%); } 
+            100% { transform: translateX(100vw); }
+        }
+        .shark {
+            font-size: 5em;
+            top: 10%;
+            animation-duration: 25s; 
+            animation-delay: 0s;
+        }
+
+
+        .turtle {
+            font-size: 3.5em;
+            top: 75%;
+            animation-duration: 35s; 
+            animation-delay: -10s;
+        }
+
+
+        .diver-1 {
+            font-size: 3em;
+            top: 30%;
+            animation-duration: 30s;
+            animation-delay: -5s;
+        }
+
+        .diver-2 {
+            font-size: 2.8em;
+            top: 50%;
+            animation-duration: 28s;
+            animation-delay: -15s; 
+        }
+
+        .diver-3 {
+            font-size: 3.2em;
+            top: 65%;
+            animation-duration: 32s;
+            animation-delay: -8s;
+        }
+
+
+        .goldfish-school {
+            font-size: 2em;
+            top: 20%;
+            animation-duration: 20s;
+            animation-delay: -3s;
+        }
+
+
+        .fish-school {
+            font-size: 1.8em;
+            top: 40%;
+            animation-duration: 18s;
+            animation-delay: -12s;
+        }
+    </style>
+</head>
+<body>
+    <div class="aquarium">
+        <div class="sprite diver-1">
+            <img src="/COMP/html/aquarium/diver1.png">
+        </div>
+        <div class="sprite diver-2">
+            <img src="/COMP/html/aquarium/diver2.png">
+        </div>
+
+        <div class="sprite goldfish-school">
+            <img src="/COMP/html/aquarium/goldFishSchool.png">
+        </div>
+
+        <div class="sprite turtle">
+            <img src="/COMP/html/aquarium/turtle.png">
+        </div>
+
+        <div class="sprite shark">
+            <img src="/COMP/html/aquarium/shark.png">
+        </div>
+
+        <div class="sprite fish-school">
+            <img src="/COMP/html/aquarium/faintSchool.png">
+        </div>  
+    </div>
+</body>
+</html>
